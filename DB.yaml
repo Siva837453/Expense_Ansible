@@ -1,6 +1,10 @@
 - name: configure my sql server
   hosts: db
   become: yes
+  vars_prompt:
+  - name: mysql_root_password
+    prompt: enter mysql password
+    private: no 
   vars:
     login_host: 172.31.29.190
   tasks:
@@ -21,14 +25,14 @@
       - pymysql
       - cryptography
       executable: pip3.9  #pip3.11 if python version is 3.11
-      
+
 
   # check password is set up or not
 
   - name: check DB connection
     community.mysql.mysql_db:
       login_user: root
-      login_password: ExpenseApp@1
+      login_password: "{{mysql_root_password}}"
       login_host: "{{login_host}}"
       filter: version
     ignore_errors: yes
@@ -37,4 +41,7 @@
   - name: check output
     ansible.builtin.debug:
       msg: "output: {{mysql_connection_output}}"
+
+  - name: setup mysql password
+    ansible.builtin.command: mysql_secure_installation --set-root-pass {{mysql_root_password}}
 
