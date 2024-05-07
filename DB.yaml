@@ -10,7 +10,7 @@
   - name: start and enable server
     ansible.builtin.service:
       name: mysqld
-      state: start
+      state: started
       Enabled: yes
 
   # check password is set up or not
@@ -27,4 +27,3 @@
     ansible.builtin.debug:
       msg: "output:{{mysql_connection_output}}"
 
-      
