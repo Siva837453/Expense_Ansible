@@ -16,7 +16,7 @@
   # check password is set up or not
 
   - name: check DB connection
-    community.mysql.mysql_info:
+    community.mysql.mysql_db:
       login_user: root
       login_password: Expense@1
       filter: version
