@@ -23,8 +23,8 @@
       login_password: Expense@1
       login_host: "{{login_host}}"
       filter: version
-      ignore_error: yes
-      register: mysql_connection_output
+    ignore_error: yes
+    register: mysql_connection_output
 
   - name: check output
     ansible.builtin.debug:
