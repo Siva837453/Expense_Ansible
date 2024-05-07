@@ -15,6 +15,14 @@
       state: started
       enabled: yes
 
+  - name: install python package pip
+    ansible.builtin.pip:
+      name:
+      - pymysql
+      - cryptography
+      executable: pip3.9  #pip3.11 if python version is 3.11
+      
+
   # check password is set up or not
 
   - name: check DB connection
