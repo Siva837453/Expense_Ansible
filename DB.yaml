@@ -1,6 +1,8 @@
 - name: configure my sql server
   hosts: db
   become: yes
+  vars:
+    login_host: 172.31.29.190
   tasks:
   - name: install my sql server
     ansible.builtin.dnf:
@@ -19,11 +21,12 @@
     community.mysql.mysql_db:
       login_user: root
       login_password: Expense@1
+      login_host: "{{login_host}}"
       filter: version
       ignore_error: yes
       register: mysql_connection_output
 
   - name: check output
     ansible.builtin.debug:
-      msg: output:{{mysql_connection_output}}
+      msg: "output: {{mysql_connection_output}}"
 
