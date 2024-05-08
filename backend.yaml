@@ -3,7 +3,7 @@
   become: yes
   vars:
     login_password: ExpenseApp@1
-    login_host: 172.31.19.200
+    login_host: 172.31.26.78
 
 
   tasks:
@@ -65,4 +65,4 @@
       state: import
       name: all
 
-      
+
