@@ -3,7 +3,7 @@
   become: yes
   vars:
     login_password: ExpenseApp@1
-    login_host: 172.31.26.78
+    login_host: db.sdevops.cloud
 
 
   tasks:
@@ -60,9 +60,18 @@
     community.mysql.mysql_db:
       login_user: root
       login_password: "{{login_password}}"
-      login_host: 172.31.26.78
+      login_host: db.sdevops.cloud
       target: /app/schema/backend.sql
       state: import
       name: all
 
+  - name: daemon reload
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: Start and enable backend
+    ansible.builtin.service:
+      name: backend
+      state: started
+      enabled: yes
 
